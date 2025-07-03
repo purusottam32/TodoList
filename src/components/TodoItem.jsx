@@ -6,11 +6,12 @@ import { useState } from "react";
 
 function TodoItem({ todo }) {
     const [isTodoEditable, setIsTodoEditable] = useState(false);
-    const [TodoMesg,setTodoMsg]=useState(todo.task)
+    const [todoMesg,setTodoMsg]=useState(todo.todo)
     const {updateTodo,deleteTodo,toggleComplete}= useTodo()
 
     const editTodo = () => {
-        updateTodo(todo.id,{...todo, task : TodoMesg})
+        updateTodo(todo.id,{...todo, todo : todoMesg})
+        setIsTodoEditable(false)
     }
 
     const toggleCompleted = () =>{
@@ -33,8 +34,8 @@ function TodoItem({ todo }) {
                 type="text"
                 className={`border outline-none w-full bg-transparent rounded-lg ${
                     isTodoEditable ? "border-black/10 px-2" : "border-transparent"
-                } ${todo.completed ? "line-through" : ""}`}
-                value={TodoMesg}
+                } ${todo.completed ? "line-through" : "" }`}
+                value={todoMesg}
                 onChange={(e) => setTodoMsg(e.target.value)}
                 readOnly={!isTodoEditable}
             />

@@ -8,7 +8,7 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (Todo) => {
-     setTodos((prev)=>[{id: Date.now , ...Todo},...prev])
+     setTodos((prev)=>[{id: Date.now() , ...Todo},...prev])
   }
 
   const deleteTodo = (id) => {
@@ -16,13 +16,11 @@ function App() {
   }
 
   const updateTodo = (id,Todo) =>{
-     setTodos((prev)=> prev.map((prevTodo)=>{prevTodo.id===id ? Todo : prevTodo}))
+     setTodos((prev)=> prev.map((prevTodo)=> prevTodo.id===id ? Todo : prevTodo))
   }
  
   const toggleComplete = (id)=>{
-    setTodos((prev)=>{
-      prev.map((prevTodo)=> prevTodo.id === id ? {...prevTodo,completed : !prevTodo.completed} : prevTodo)
-    })
+    setTodos((prev)=> prev.map((prevTodo)=> prevTodo.id === id ? {...prevTodo, completed: !prevTodo.completed} : prevTodo))
   }
   useEffect(() => {
     const todos =JSON.parse(localStorage.getItem("todos"))
@@ -32,7 +30,7 @@ function App() {
   }, [])
   
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify("todos"))
+    localStorage.setItem("todos", JSON.stringify(todos))
   
   }, [todos])
   
